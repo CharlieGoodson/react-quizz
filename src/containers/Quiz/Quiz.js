@@ -8,7 +8,6 @@ class Quiz extends Component {
         activeQuiz: 0,
         quiz: [
             {
-                id: 1,
                 question: 'Какого цвета небо?',
                 rightAnswerId: 3,
                 answers: [
@@ -19,7 +18,6 @@ class Quiz extends Component {
                 ]
             },
             {
-                id: 2,
                 question: 'Какая столица США?',
                 rightAnswerId: 4,
                 answers: [
@@ -34,7 +32,13 @@ class Quiz extends Component {
 
     onAnswerClickHandler = answerId => {
         console.log('AnswerId:', answerId)
-        this.setState({activeQuiz: this.state.activeQuiz + 1})
+        const currentQuestion = this.state.quiz[this.state.activeQuiz]
+
+        if (currentQuestion.rightAnswerId === answerId) {
+            this.setState({activeQuiz: this.state.activeQuiz + 1})
+        } else {
+
+        }
     }
 
     render() {
