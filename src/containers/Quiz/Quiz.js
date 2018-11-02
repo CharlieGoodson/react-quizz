@@ -6,6 +6,7 @@ class Quiz extends Component {
 
     state = {
         activeQuiz: 0,
+        answerState: null,
         quiz: [
             {
                 question: 'Какого цвета небо?',
@@ -31,14 +32,29 @@ class Quiz extends Component {
     }
 
     onAnswerClickHandler = answerId => {
-        console.log('AnswerId:', answerId)
         const currentQuestion = this.state.quiz[this.state.activeQuiz]
 
         if (currentQuestion.rightAnswerId === answerId) {
-            this.setState({activeQuiz: this.state.activeQuiz + 1})
+            this.setState({ answerState: { [answerId]: 'success'} })
+            const timeout = setTimeout(() => {
+                
+                if (this.isQuizFinish()) {
+                    console.log('Finished!')
+                } else {
+                    this.setState({
+                        activeQuiz: this.state.activeQuiz + 1,
+                        answerState: null
+                    })
+                }            
+                clearTimeout(timeout)
+            }, 1000)
         } else {
-
+            this.setState({ answerState: { [answerId]: 'error'} })
         }
+    }
+
+    isQuizFinish() {
+        return this.state.activeQuiz + 1 === this.state.quiz.length
     }
 
     render() {
@@ -52,6 +68,7 @@ class Quiz extends Component {
                         onAnswerClick={this.onAnswerClickHandler}
                         quizNumber={this.state.activeQuiz + 1}
                         quizLength={this.state.quiz.length}
+                        state={this.state.answerState}
                     />
                 </div>
             </div>
