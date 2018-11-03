@@ -7,7 +7,7 @@ class Quiz extends Component {
 
     state = {
         results: {},
-        isFinished: false,
+        isFinished: true,
         activeQuiz: 0,
         answerState: null,
         quiz: [
@@ -24,13 +24,24 @@ class Quiz extends Component {
             },
             {
                 id: 2,
-                question: 'Где находится столица США?',
-                rightAnswerId: 4,
+                question: 'Столицей США является...',
+                rightAnswerId: 1,
                 answers: [
-                    {text: 'Вашингтон', id: 4},
+                    {text: 'Вашингтон', id: 1},
                     {text: 'Атланта', id: 2},
                     {text: 'Cиэтл', id: 3},
-                    {text: 'Нью-Йорк', id: 1}
+                    {text: 'Нью-Йорк', id: 4}
+                ]
+            },
+            {
+                id: 3,
+                question: 'Когда началась Вторая Мировая Война?',
+                rightAnswerId: 2,
+                answers: [
+                    {text: '1938', id: 1},
+                    {text: '1939', id: 2},
+                    {text: '1936', id: 3},
+                    {text: '1941', id: 4}
                 ]
             }
         ]
@@ -68,10 +79,11 @@ class Quiz extends Component {
                 clearTimeout(timeout)
             }, 1000)
         } else {
-            results[currentQuestion] = 'error'
-            this.setState({ answerState: { [answerId]: 'error'},
-            results   
-        })
+            results[currentQuestion.id] = 'error'
+            this.setState({
+                answerState: { [answerId]: 'error'},
+                results   
+            })
         }
     }
 
