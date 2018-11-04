@@ -7,7 +7,7 @@ class Quiz extends Component {
 
     state = {
         results: {},
-        isFinished: true,
+        isFinished: false,
         activeQuiz: 0,
         answerState: null,
         quiz: [
